@@ -1,0 +1,16 @@
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+OctoPrint_Helloworld.egg-info/PKG-INFO
+OctoPrint_Helloworld.egg-info/SOURCES.txt
+OctoPrint_Helloworld.egg-info/dependency_links.txt
+OctoPrint_Helloworld.egg-info/entry_points.txt
+OctoPrint_Helloworld.egg-info/not-zip-safe
+OctoPrint_Helloworld.egg-info/requires.txt
+OctoPrint_Helloworld.egg-info/top_level.txt
+octoprint_helloworld/__init__.py
+octoprint_helloworld/static/css/helloworld.css
+octoprint_helloworld/static/js/helloworld.js
+octoprint_helloworld/static/less/helloworld.less
+octoprint_helloworld/templates/README.txt
