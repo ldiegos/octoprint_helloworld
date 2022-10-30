@@ -25,6 +25,14 @@ class HelloWorldPlugin(FilamentManagerApi,
                             octoprint.plugin.TemplatePlugin,
                             octoprint.plugin.EventHandlerPlugin):
 
+
+class HelloWorldPlugin(octoprint.plugin.StartupPlugin,
+                            octoprint.plugin.ShutdownPlugin,
+                            octoprint.plugin.SettingsPlugin,
+                            octoprint.plugin.AssetPlugin,
+                            octoprint.plugin.TemplatePlugin,
+                            octoprint.plugin.EventHandlerPlugin):
+
     def on_after_startup(self):
         self._logger.info("Hello World!")
 
