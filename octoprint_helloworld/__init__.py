@@ -16,14 +16,15 @@ from octoprint.util import dict_merge
 from octoprint.util.version import is_octoprint_compatible
 
 
+
 #class HelloWorldPlugin(octoprint.plugin.StartupPlugin):
-class HelloWorldPlugin(FilamentManagerApi,
-                            octoprint.plugin.StartupPlugin,
-                            octoprint.plugin.ShutdownPlugin,
-                            octoprint.plugin.SettingsPlugin,
-                            octoprint.plugin.AssetPlugin,
-                            octoprint.plugin.TemplatePlugin,
-                            octoprint.plugin.EventHandlerPlugin):
+#class HelloWorldPlugin(FilamentManagerApi,
+#                            octoprint.plugin.StartupPlugin,
+#                            octoprint.plugin.ShutdownPlugin,
+#                            octoprint.plugin.SettingsPlugin,
+#                            octoprint.plugin.AssetPlugin,
+#                            octoprint.plugin.TemplatePlugin,
+#                            octoprint.plugin.EventHandlerPlugin):
 
 
 class HelloWorldPlugin(octoprint.plugin.StartupPlugin,
@@ -69,7 +70,7 @@ class HelloWorldPlugin(octoprint.plugin.StartupPlugin,
         )
 
 
-__plugin_pythoncompat__ = ">=3.7,<4"
+__plugin_pythoncompat__ = ">=2,<8"
 #__plugin_implementation__ = HelloWorldPlugin()
 
 
