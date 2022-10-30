@@ -38,6 +38,17 @@ class HelloWorldPlugin(octoprint.plugin.StartupPlugin,
     def on_after_startup(self):
         self._logger.info("Hello World!")
 
+    def __init__(self):
+        self.client_id = None
+        self.filamentManager = None
+        # self.filamentOdometer = None
+        self.myFilamentOdometer = None
+        self.lastPrintState = None
+
+        self.odometerEnabled = False
+        self.pauseEnabled = False
+        self.pauseThresholds = dict()
+
     def on_shutdown(self):
         if self.filamentManager is not None:
             self.filamentManager.close()
