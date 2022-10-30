@@ -15,6 +15,7 @@ from octoprint.events import Events
 from octoprint.util import dict_merge
 from octoprint.util.version import is_octoprint_compatible
 
+from .newodometer import NewFilamentOdometer
 
 
 #class HelloWorldPlugin(octoprint.plugin.StartupPlugin):
@@ -50,7 +51,6 @@ class HelloWorldPlugin(octoprint.plugin.StartupPlugin,
         pass
 
     # Softwareupdate hook
-
     def get_update_information(self):
         return dict(
             filamentmanager=dict(
@@ -68,6 +68,18 @@ class HelloWorldPlugin(octoprint.plugin.StartupPlugin,
                 pip="https://github.com/OllisGit/OctoPrint-FilamentManager/releases/latest/download/master.zip"
             )
         )
+
+# Protocol hook
+    def filament_odometer(self, comm_instance, phase, cmd, cmd_type, gcode, *args, **kwargs):
+        # is enabled in plugin settings and is currently prining
+
+        if self.odometerEnabled and self._printer.is_printing():
+            # self.filamentOdometer.parse(gcode, cmd)
+            self.myFilamentOdometer.processGCodeLine(cmd)
+
+            if self.pauseEnabled and self.check_threshold():
+                self._logger.info("Filament is running out, pausing print")
+                self._printer.pause_print()
 
 
 __plugin_pythoncompat__ = ">=2,<8"
@@ -88,6 +100,6 @@ def __plugin_load__():
 
     global __plugin_hooks__
     __plugin_hooks__ = {
-        "octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information #,
-    #    "octoprint.comm.protocol.gcode.sent": __plugin_implementation__.filament_odometer
+        "octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information ,
+        "octoprint.comm.protocol.gcode.sent": __plugin_implementation__.filament_odometer
     }
