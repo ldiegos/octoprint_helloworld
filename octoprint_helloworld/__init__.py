@@ -21,4 +21,22 @@ class HelloWorldPlugin(octoprint.plugin.StartupPlugin):
         self._logger.info("Hello World!")
 
 __plugin_pythoncompat__ = ">=3.7,<4"
-__plugin_implementation__ = HelloWorldPlugin()
+#__plugin_implementation__ = HelloWorldPlugin()
+
+
+def __plugin_load__():
+    if not is_octoprint_compatible(__required_octoprint_version__):
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error("OctoPrint version is not compatible ({version} required)"
+                     .format(version=__required_octoprint_version__))
+        return
+
+    global __plugin_implementation__
+    #__plugin_implementation__ = FilamentManagerPlugin()
+    __plugin_implementation__ = HelloWorldPlugin()
+    global __plugin_hooks__
+    __plugin_hooks__ = {
+        "octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information,
+        "octoprint.comm.protocol.gcode.sent": __plugin_implementation__.filament_odometer
+    }
